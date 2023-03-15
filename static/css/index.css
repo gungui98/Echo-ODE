@@ -121,9 +121,15 @@ body {
   font-size: 0;
 }
 
+.item {
+  display: flex;
+  justify-content: center;
+}
 .results-carousel video {
+
   margin: 0;
 }
+
 
 .slider-pagination .slider-page {
   background: #000000;

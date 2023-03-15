@@ -40,7 +40,12 @@
   <link rel="stylesheet" href="static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
@@ -237,12 +242,12 @@ End image carousel -->
             type="video/mp4">
           </video>
         </div>
-        <!-- <!-- <div class="item item-video2">
+         <div class="item item-video2">
           <video poster="" id="video2" autoplay controls muted loop width="840" height="768">
             <source src="static/videos/compress/enet_patient008.mp4"
             type="video/mp4">
           </video>
-        </div> -->
+        </div> 
         <div class="item item-video3">
           <video poster="" id="video3" autoplay controls muted loop width="840" height="768">
             <source src="static/videos/compress/deeplabv3_patient089.mp4  "

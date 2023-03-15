@@ -146,7 +146,7 @@
       </video> -->
       <img src="./static/images/demo.png" >
       <h2 class="subtitle has-text-centered">
-        add latex here
+        An overview of our method for segmenting echocardiography. Taking the raw echocardiography sequence $\mathbf{I}$ as a starting point, the 3D block first encodes the whole ultrasound sequence, resulting in an sequence embedding vector. At time step $t$, the 2D latent UNet takes an ultrasound image, $\mathbf{I}_t$, and generates an initial vector field by concatenating the sequence embedding vector with the encoded image vector. The  ODE solve for the deformation vector field $\phi_t$, used to generate pseudo-image $\hat{\mathbf{I}}_t$ and pseudo segmentation map $\hat{\mathbf{m}}_t$.
       </h2>
     </div>
   </div>
@@ -161,7 +161,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            An overview of our method for segmenting echocardiography. Taking the raw echocardiography sequence $\mathbf{I}$ as a starting point, the 3D block first encodes the whole ultrasound sequence, resulting in an sequence embedding vector. At time step $t$, the 2D latent UNet takes an ultrasound image, $\mathbf{I}_t$, and generates an initial vector field by concatenating the sequence embedding vector with the encoded image vector. The  ODE solve for the deformation vector field $\phi_t$, used to generate pseudo-image $\hat{\mathbf{I}}_t$ and pseudo segmentation map $\hat{\mathbf{m}}_t$.
+            Convolutional neural networks (CNN) have recently proven its excellent ability to segment 2D cardiac ultrasound images. In spite of this, the majority of attempts to perform fully sequence segmentation of cardiac ultrasound videos continue to rely on models trained on end-diastole (ED) and end-systole (ES) images instead of directly extracting temporal features from a sequence of cardiac ultrasound images. In this work, we  consider the estimation of temporal information between ultrasound images as a registration estimation problem and then presents a novel and accurate method for diffeomorphic image temporal extraction using neural ordinary differential equations (NODEs) to extract temporal information as registration field. In particular, we consider the problem of the registration field as a discrete vector field between frames and formulate it as a continuous trajectory estimation . The estimated registration field is then applied to the  segmentation mask in order to segment a whole cardiac cycle. We conduct comprehensive experiments on the CAMUS dataset and the results show that the proposed method surpasses the prior state-of-the-art (SOTA) on multiple evaluation metrics with major margins. These results indicate that spatial temporal data processing is necessary for the implementation of NODES in medical imaging applications and open up new research directions to solve the echocardiography segmentation tasks.
           </p>
         </div>
       </div>

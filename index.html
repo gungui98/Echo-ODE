@@ -144,9 +144,9 @@
         <source src="static/videos/banner_video.mp4"
         type="video/mp4">
       </video> -->
-      <img src="./static/images/demo.png" >
+      <img src="./static/images/pipeline.png" >
       <h2 class="subtitle has-text-centered">
-        An overview of our method for segmenting echocardiography. Taking the raw echocardiography sequence $\mathbf{I}$ as a starting point, the 3D block first encodes the whole ultrasound sequence, resulting in an sequence embedding vector. At time step $t$, the 2D latent UNet takes an ultrasound image, $\mathbf{I}_t$, and generates an initial vector field by concatenating the sequence embedding vector with the encoded image vector. The  ODE solve for the deformation vector field $\phi_t$, used to generate pseudo-image $\hat{\mathbf{I}}_t$ and pseudo segmentation map $\hat{\mathbf{m}}_t$.
+        An overview of Echo-ODE for segmenting echocardiography. Taking the echocardiography sequence $I$ and two segmentation map $m_0$ and $m_1$ as a starting point. At time step $t$, the the model encodes the ultrasound image, $I_t$, and decode it with an encoding of $t$ by a positional encoding in latent space. The model then generates an initial vector field by spatially adaptive normalizing the decoder features with positional embedding of $t$ and segmentation map $m_0$. The ODE solves for the deformation vector field $\phi_t$, used to generate a pseudo-image $\hat{I}_t$ and a pseudo-segmentation map $\hat{m}_t$.
       </h2>
     </div>
   </div>
@@ -161,7 +161,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Convolutional neural networks (CNN) have recently proven its excellent ability to segment 2D cardiac ultrasound images. In spite of this, the majority of attempts to perform fully sequence segmentation of cardiac ultrasound videos continue to rely on models trained on end-diastole (ED) and end-systole (ES) images instead of directly extracting temporal features from a sequence of cardiac ultrasound images. In this work, we  consider the estimation of temporal information between ultrasound images as a registration estimation problem and then presents a novel and accurate method for diffeomorphic image temporal extraction using neural ordinary differential equations (NODEs) to extract temporal information as registration field. In particular, we consider the problem of the registration field as a discrete vector field between frames and formulate it as a continuous trajectory estimation . The estimated registration field is then applied to the  segmentation mask in order to segment a whole cardiac cycle. We conduct comprehensive experiments on the CAMUS dataset and the results show that the proposed method surpasses the prior state-of-the-art (SOTA) on multiple evaluation metrics with major margins. These results indicate that spatial temporal data processing is necessary for the implementation of NODES in medical imaging applications and open up new research directions to solve the echocardiography segmentation tasks.
+            Convolutional neural networks (CNNs) have recently proven their excellent ability to segment 2D cardiac ultrasound images. However, the majority of attempts to perform full sequence segmentation of cardiac ultrasound videos either rely on models trained only on end-diastole (ED) and end-systole (ES) images, or fail to directly extract temporal features from a sequence of cardiac ultrasound images while also not preserving the topology of segmentation maps. To address these issues, in this work, we consider the estimation of sequence segmentation of ultrasound video as a registration estimation problem and then present a novel method for diffeomorphic image registration using neural ordinary differential equations (Neural ODEs) to extract temporal information from ultrasound video. In particular, we consider the problem of the registration field vector field between frames as a continuous trajectory ODE. The estimated registration field is then applied to the segmentation mask of the first frame to obtain a segment for the whole cardiac cycle. The proposed method, Echo-ODE, introduces several key improvements compared to the previous SOTAs. Firstly, by solving a continuous ODE, the proposed method achieves smoother segmentation, preserving the topology of segmentation maps over the whole sequence (Hausdorff distance: 3.7–4.4). Secondly, our method ensures temporal consistency between frames without explicitly optimizing for temporal consistency attributes, while still achieving temporal consistency in 91\% of the videos in the dataset. Lastly, our method is able to maintain the clinical accuracy of the segmentation maps (mean absolute error (MAE) of the left-ventricular ejection fraction (LVEF): 2.7–3.1). The results show that the proposed method surpasses the previous state-of-the-art in multiple aspects, demonstrating the importance of spatial-temporal data processing for the implementation of NODEs in medical imaging applications. These findings open up new research directions for solving echocardiography segmentation tasks.
           </p>
         </div>
       </div>
@@ -227,11 +227,27 @@ End image carousel -->
 </section> --> 
 <!-- End youtube video -->
 
+<!-- Qualitative comparison -->
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Qualitative comparison</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/benchmark.png" >
+          <p>
+            Performance of the methods on temporal consistency, anatomical accuracy, and clinical metric. The Hausdorff distance (HD), Dice score and mean absolute error of ejection fraction (EF) are reported in terms of the mean and the standard deviation across 98 test sequences. The temporal error (Temp. Error) is the number of sequences that have at least one temporal inconsistency. The mDice is the mean Dice score of the LV myocardium and LV epicardium. The Dice LV$_{epi}$ and Dice LV$_{myo}$ are the Dice scores of the LV epicardium and LV myocardium, respectively. The best results are highlighted in bold.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <!-- Video carousel -->
 <section class="hero is-small">
   <div class="hero-body">
-    <div class="container">
+    <div class="container is-centered has-text-centered">
       <h2 class="title is-3">Visualization examples</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
